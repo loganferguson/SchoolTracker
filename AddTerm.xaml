@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TrackerApp.AddTerm"
+             NavigationPage.HasNavigationBar="false">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="Add Term"
+                FontSize="30"
+                Padding="5, 10"
+                />
+            <Label Text="Title" Padding="5, 0"></Label>
+            
+            <Entry x:Name="TermTitleEntry" Placeholder="Spring Term"></Entry>
+
+            <Label Text="Start" Padding="5, 0"></Label>
+                <DatePicker x:Name="StartTerm_DatePicker"></DatePicker>
+            <Label Text="End" Padding="5, 0"></Label>
+                <DatePicker x:Name="EndTerm_DatePicker"></DatePicker>
+
+            <ContentView>
+                <FlexLayout JustifyContent="Center">
+                    <Button x:Name="AddTermCancel" Clicked="AddTermCancel_Clicked" Text="Cancel" Padding="20, 0" Margin="10, 20"></Button>
+                    <Button x:Name="AddTermSubmit" Clicked="AddTermSubmit_Clicked" Text="Submit" Padding="20, 0" Margin="10, 20"></Button>
+                </FlexLayout>
+            </ContentView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

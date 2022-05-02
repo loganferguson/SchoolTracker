@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TrackerApp.Terms"
+             NavigationPage.HasNavigationBar="false">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <ContentView>
+                <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center" Padding="10, 10">
+                    <Label 
+                        Text="Terms"
+                        FontSize="30"
+                        VerticalTextAlignment="Center"
+                    />
+
+                    <Button 
+                        x:Name="AddTermButton" 
+                        Clicked="AddTerm_Clicked" 
+                        BackgroundColor="Transparent"
+                        BorderColor="#bbbbbb"
+                        BorderWidth="0.4"
+                        Text="Add Term"
+                        FontAttributes="None"
+                        FontSize="16"
+                        
+                        >
+                    </Button>
+                </FlexLayout>
+            </ContentView>
+            <StackLayout Orientation="Horizontal"
+                         x:Name="TermMenu"
+                         x:FieldModifier="Public"
+                         Margin="10, 0">
+                <Button 
+                                                x:Name="EditTermButton" 
+                                                Clicked="EditTerm_Clicked" 
+                                                BackgroundColor="Transparent"
+                                                BorderColor="#bbbbbb"
+                                                BorderWidth="0.4"
+                                                WidthRequest="90"
+                                                Margin="0, 0, 10, 0"
+                                                Text="View/Edit">
+                </Button>
+                <Button 
+                                                x:Name="DeleteTermButton"
+                                                Clicked="DeleteTerm_Clicked"
+                                                WidthRequest="90"
+                                                BorderColor="#bbbbbb"
+                                                BorderWidth="0.4"
+                                                BackgroundColor="Transparent"
+                                                Margin="0, 0, 10, 0"
+                                                HorizontalOptions="End"
+                                                Text="Delete">
+                </Button>
+
+            </StackLayout>
+
+            <ListView 
+                x:Name="TermListView"
+                HasUnevenRows="True"
+                SelectionMode="Single"
+                ItemSelected="TermListView_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" Margin="5 , 5"  BackgroundColor="Azure">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height = "Auto" />
+                                    <RowDefinition/>
+                                    <RowDefinition Height = "Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Label                             
+                                            x:Name="termTitle"
+                                            x:FieldModifier="Public"
+                                            Grid.Row="0" 
+                                            Grid.Column="0" 
+                                            Grid.ColumnSpan="1" 
+                                            FontSize="18" 
+                                            FontAttributes="Bold" 
+                                            Text="{Binding TermTitle}">
+                                </Label>
+                                        <StackLayout Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="1" VerticalOptions="Center">
+                                            <Label Text="Start"></Label>
+                                            <Label x:Name="termStart" 
+                                                   x:FieldModifier="Public" 
+                                                   Text="{Binding TermStart, StringFormat='{0:MM/dd/yy}'}">
+                                                
+                                            </Label>
+                                        </StackLayout>
+                                
+                                        <StackLayout Grid.Column="1" 
+                                                     Grid.Row="1" 
+                                                     Grid.ColumnSpan="1" 
+                                                     VerticalOptions="Center">
+                                            <Label Text="End"></Label>
+                                            <Label x:Name="termEnd" 
+                                                   x:FieldModifier="Public" 
+                                                   Text="{Binding TermEnd, StringFormat='{0:MM/dd/yy}'}">
+                                                
+                                            </Label>
+                                        </StackLayout>
+                                
+                                    
+
+                                        
+
+                                   
+                            </Grid>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

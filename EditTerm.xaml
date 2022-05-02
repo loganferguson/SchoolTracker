@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TrackerApp.EditTerm"
+             NavigationPage.HasNavigationBar="false">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="View/Edit Term"
+                FontSize="30"
+                Padding="5, 10"
+                />
+            <Label Text="Title" Padding="5, 0"></Label>
+
+            <Entry x:Name="TermTitleEntry" x:FieldModifier="Public" Placeholder="Spring Term"></Entry>
+
+            <Label Text="Start" Padding="5, 0"></Label>
+            <DatePicker x:Name="StartTerm_DatePicker" x:FieldModifier="Public"></DatePicker>
+            <Label Text="End" Padding="5, 0"></Label>
+            <DatePicker x:Name="EndTerm_DatePicker" x:FieldModifier="Public"></DatePicker>
+            
+            
+            <!--COURSE EDIT/DELETE MENU-->
+
+            <StackLayout Orientation="Horizontal"
+                         x:Name="CourseMenu"
+                         x:FieldModifier="Public"
+                         Margin="10, 0">
+                <Button 
+                                                x:Name="EditCourseButton" 
+                                                Clicked="EditCourse_Clicked" 
+                                                BackgroundColor="Transparent"
+                                                BorderColor="#bbbbbb"
+                                                BorderWidth="0.4"
+                                                WidthRequest="90"
+                                                Margin="0, 0, 10, 0"
+                                                Text="View/Edit">
+                </Button>
+                <Button 
+                                                x:Name="DeleteCourseButton"
+                                                Clicked="DeleteCourse_Clicked"
+                                                WidthRequest="90"
+                                                BorderColor="#bbbbbb"
+                                                BorderWidth="0.4"
+                                                BackgroundColor="Transparent"
+                                                Margin="0, 0, 10, 0"
+                                                HorizontalOptions="End"
+                                                Text="Delete">
+                </Button>
+
+            </StackLayout>
+
+            <!--COURSE LIST-->
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="Center"
+                         >
+                <Label Text="Courses"
+                   FontSize="18"
+                   Padding="5, 0"
+                   VerticalOptions="Center"/>
+                <Button Text="Add Course"
+                        Clicked="AddCourse_Clicked"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="Center"
+                        WidthRequest="100"
+                        Margin="5, 0"
+                        >
+                </Button>
+            </StackLayout>
+            
+                <ListView x:Name="EditTermCourseList"
+                          HasUnevenRows="true"
+                          ItemSelected="CourseListView_ItemSelected"
+                          >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="LightGray"
+                                         Padding="10, 10"
+                                         Margin="10, 10">
+                                <Label Text="{Binding CourseName}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"/>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Start"/>
+                                    <Label Text="{Binding CourseStart, StringFormat='{0:MM/dd/yy}'}"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="End"/>
+                                    <Label Text="{Binding CourseEnd, StringFormat='{0:MM/dd/yy}'}"/>
+                                </StackLayout>
+
+                            </StackLayout>
+                        </ViewCell>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+                <ContentView>
+                <FlexLayout JustifyContent="Center">
+                    <Button x:Name="EditTermCancel" Clicked="EditTermCancel_Clicked" Text="Cancel" Padding="20, 0" Margin="10, 20"></Button>
+                    <Button x:Name="EditTermSubmit" Clicked="EditTermSubmit_Clicked" Text="Submit" Padding="20, 0" Margin="10, 20"></Button>
+                </FlexLayout>
+            </ContentView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

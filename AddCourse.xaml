@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TrackerApp.AddCourse"
+             NavigationPage.HasNavigationBar="false">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="Add Course"
+                FontSize="30"
+                Padding="5, 10"
+                />
+            
+
+            <Label Text="Course Name" Padding="5, 0"></Label>
+            <Entry x:Name="CourseNameEntry" Placeholder="MATH101"></Entry>
+
+
+            <StackLayout Orientation="Horizontal">
+                <StackLayout>
+                    <Label Text="Start" Padding="5, 0"></Label>
+                    <DatePicker x:Name="StartCourse_DatePicker" x:FieldModifier="Public"></DatePicker>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="EndAndExpand" Margin="10, 0">
+                    <Label Text="Notifications"></Label>
+                    <Switch x:Name="StartCourse_Switch" x:FieldModifier="Public"></Switch>
+                </StackLayout>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal">
+                <StackLayout>
+                    <Label Text="End" Padding="5, 0"></Label>
+                    <DatePicker x:Name="EndCourse_DatePicker" x:FieldModifier="Public"></DatePicker>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="EndAndExpand" Margin="10, 0">
+                    <Label Text="Notifications"></Label>
+                    <Switch x:Name="EndCourse_Switch" x:FieldModifier="Public"></Switch>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout>
+                <Label Text="Course Instructor" FontSize="20" HorizontalOptions="Center" Margin="0, 10"></Label>
+
+                <StackLayout>
+                    <Label Text="Name" Padding="5, 0"></Label>
+                    <Entry x:Name="InstructorNameEntry" Placeholder="Doug Wilson"></Entry>
+
+
+                    <Label Text="Phone" Padding="5, 0"></Label>
+                    <Entry x:Name="InstructorPhoneEntry" Placeholder="555-555-5555"></Entry>
+
+
+                    <Label Text="Email" Padding="5, 0"></Label>
+                    <Entry x:Name= "InstructorEmailEntry" Placeholder="dwilson@school.edu"></Entry>
+                </StackLayout>
+                
+            </StackLayout>
+
+            
+
+            <ContentView>
+                <FlexLayout JustifyContent="Center">
+                    <Button x:Name="AddCourseCancel" Clicked="AddCourseCancel_Clicked" Text="Cancel" Padding="20, 0" Margin="10, 20"></Button>
+                    <Button x:Name="AddCourseSubmit" Clicked="AddCourseSubmit_Clicked" Text="Submit" Padding="20, 0" Margin="10, 20"></Button>
+                </FlexLayout>
+            </ContentView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
