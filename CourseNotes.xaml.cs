@@ -26,10 +26,11 @@ namespace TrackerApp
         static DateTime course_start;
         static DateTime course_end;
         static bool start_notify;
-        static bool end_notify; 
+        static bool end_notify;
+        static string course_status;
 
         public SQLiteConnection _db;
-        public CourseNotes(SQLiteConnection db, int termId, string termTitle, DateTime termStart, DateTime termEnd, int courseId, string courseName, DateTime courseStart, DateTime courseEnd, bool startNotify, bool endNotify)
+        public CourseNotes(SQLiteConnection db, int termId, string termTitle, DateTime termStart, DateTime termEnd, int courseId, string courseName, DateTime courseStart, DateTime courseEnd, bool startNotify, bool endNotify, string courseStatus)
         {
             InitializeComponent();
 
@@ -44,6 +45,7 @@ namespace TrackerApp
             course_end = courseEnd;
             start_notify = startNotify;
             end_notify = endNotify;
+            course_status = courseStatus;
 
             _db = db;
             SQLiteCommand command = new SQLiteCommand(db);
@@ -59,12 +61,12 @@ namespace TrackerApp
             var updatedNotes = GetCurrentNotes() + Environment.NewLine + "\t\u2022 " + NotesEntry.Text;
             _db.Execute("UPDATE Course SET Notes = ? WHERE CourseId = ?", updatedNotes, course_id);
 
-            Navigation.PushAsync(new CourseNotes(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, start_notify, end_notify));
+            Navigation.PushAsync(new CourseNotes(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, start_notify, end_notify, course_status));
         }
 
         public void CancelNote_Clicked(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, start_notify, end_notify));
+            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, start_notify, end_notify, course_status));
         }
 
         public string GetCurrentNotes()

@@ -17,7 +17,7 @@ namespace TrackerApp.Models
         public DateTime CourseStart { get; set; }
         public DateTime CourseEnd { get; set; }
 
-        public bool IsComplete { get; set; }
+        public string Status { get; set; }
         public string Notes { get; set; }
         public bool StartNotificationsOn { get; set; }
 

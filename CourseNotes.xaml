@@ -25,7 +25,7 @@
             <Editor x:Name="NotesEntry" Placeholder="Enter a note." VerticalOptions="EndAndExpand"></Editor>
 
             <Button Text="Submit" Clicked="SubmitNote_Clicked"></Button>
-            <Button Text="Cancel" Clicked="CancelNote_Clicked" Margin="0, 5"></Button>
+            <Button Text="Back to Course" Clicked="CancelNote_Clicked" Margin="0, 5"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

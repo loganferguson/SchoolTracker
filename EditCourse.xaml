@@ -7,69 +7,79 @@
              x:Class="TrackerApp.EditCourse"
              NavigationPage.HasNavigationBar="false">
     <ContentPage.Content>
-        <StackLayout>
-            <Label 
-                Text="View/Edit Course"
-                FontSize="30"
-                Padding="5, 10"
-                />
-            <Button Text="Course Notes" Clicked="CourseNotes_Clicked" HorizontalOptions="Start" Margin="5, 0"></Button>
-            <Label Text="Course" Padding="5, 0"></Label>
-
-            <Entry x:Name="CourseName" x:FieldModifier="Public" Placeholder="Spring Term"></Entry>
-
-            <StackLayout Orientation="Horizontal">
-                <StackLayout>
-                    <Label Text="Start" Padding="5, 0"></Label>
-                    <DatePicker x:Name="StartCourse_DatePicker" x:FieldModifier="Public"></DatePicker>
-                </StackLayout>
-
-                <StackLayout HorizontalOptions="EndAndExpand" Margin="10, 0">
-                    <Label Text="Notifications"></Label>
-                    <Switch x:Name="StartCourse_Switch" x:FieldModifier="Public"></Switch>
-                </StackLayout>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
-                <StackLayout>
-                    <Label Text="End" Padding="5, 0"></Label>
-                    <DatePicker x:Name="EndCourse_DatePicker" x:FieldModifier="Public"></DatePicker>
-                </StackLayout>
-
-                <StackLayout HorizontalOptions="EndAndExpand" Margin="10, 0">
-                    <Label Text="Notifications"></Label>
-                    <Switch x:Name="EndCourse_Switch" x:FieldModifier="Public"></Switch>
-                </StackLayout>
-                
-            </StackLayout>
-
-
+        <ScrollView>
             <StackLayout>
-                <Label Text="Course Instructor" FontSize="20" HorizontalOptions="Center" Margin="0, 10"></Label>
+            
+                <Label 
+                        Text="View/Edit Course"
+                        FontSize="30"
+                        Padding="5, 10"/>
+
+
 
                 <StackLayout>
-                    <Label Text="Name" Padding="5, 0"></Label>
-                    <Entry x:Name="InstructorNameEntry" Placeholder="Doug Wilson"></Entry>
+                    <Button Text="Course Notes" Clicked="CourseNotes_Clicked" HorizontalOptions="Start" Margin="5, 0"></Button>
+                    <Label Text="Course" Padding="5, 0"></Label>
+
+                    <Entry x:Name="CourseName" x:FieldModifier="Public" Placeholder="Spring Term"></Entry>
+
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <StackLayout>
+                            <Label Text="Start" Padding="5, 0"></Label>
+                            <DatePicker x:Name="StartCourse_DatePicker" x:FieldModifier="Public"></DatePicker>
+                        </StackLayout>
+
+                        <StackLayout HorizontalOptions="EndAndExpand" Margin="10, 0">
+                            <Label Text="Notifications"></Label>
+                            <Switch x:Name="StartCourse_Switch" x:FieldModifier="Public"></Switch>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout>
+                            <Label Text="End" Padding="5, 0"></Label>
+                            <DatePicker x:Name="EndCourse_DatePicker" x:FieldModifier="Public"></DatePicker>
+                        </StackLayout>
+
+                        <StackLayout HorizontalOptions="EndAndExpand" Margin="10, 0">
+                            <Label Text="Notifications"></Label>
+                            <Switch x:Name="EndCourse_Switch" x:FieldModifier="Public"></Switch>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Status" Padding="5, 0"></Label>
+                        <Picker x:Name="StatusPicker"></Picker>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Course Instructor" FontSize="20" HorizontalOptions="Center" Margin="0, 10"></Label>
+
+                        <StackLayout>
+                            <Label Text="Name" Padding="5, 0"></Label>
+                            <Entry x:Name="InstructorNameEntry" Placeholder="Doug Wilson"></Entry>
 
 
-                    <Label Text="Phone" Padding="5, 0"></Label>
-                    <Entry x:Name="InstructorPhoneEntry" Placeholder="555-555-5555"></Entry>
+                            <Label Text="Phone" Padding="5, 0"></Label>
+                            <Entry x:Name="InstructorPhoneEntry" Placeholder="555-555-5555"></Entry>
 
 
-                    <Label Text="Email" Padding="5, 0"></Label>
-                    <Entry x:Name= "InstructorEmailEntry" Placeholder="dwilson@school.edu"></Entry>
+                            <Label Text="Email" Padding="5, 0"></Label>
+                            <Entry x:Name= "InstructorEmailEntry" Placeholder="dwilson@school.edu"></Entry>
+                        </StackLayout>
+
+                    </StackLayout>
                 </StackLayout>
 
-            </StackLayout>
 
+                <!--ASSESSMENT EDIT/DELETE MENU-->
 
-            <!--ASSESSMENT EDIT/DELETE MENU-->
-
-            <StackLayout Orientation="Horizontal"
+                <StackLayout Orientation="Horizontal"
                          x:Name="AssessmentMenu"
                          x:FieldModifier="Public"
                          Margin="10, 0">
-                <Button 
+                    <Button 
                                                 x:Name="EditAssessmentButton" 
                                                 Clicked="EditAssessment_Clicked" 
                                                 BackgroundColor="Transparent"
@@ -78,8 +88,8 @@
                                                 WidthRequest="70"
                                                 Margin="0, 0, 10, 0"
                                                 Text="View/Edit">
-                </Button>
-                <Button 
+                    </Button>
+                    <Button 
                                                 x:Name="DeleteAssessmentButton"
                                                 Clicked="DeleteAssessment_Clicked"
                                                 WidthRequest="70"
@@ -89,78 +99,76 @@
                                                 Margin="0, 0, 10, 0"
                                                 HorizontalOptions="End"
                                                 Text="Delete">
-                </Button>
+                    </Button>
 
-            </StackLayout>
+                </StackLayout>
 
-            
 
-            <!--ASSESSMENT LIST-->
-            <StackLayout Orientation="Horizontal"
+
+                <!--ASSESSMENT LIST-->
+                <StackLayout Orientation="Horizontal"
                          VerticalOptions="Center"
                          Margin="0, 10">
-                <Label Text="Assessments"
-                   FontSize="18"
-                   Padding="5, 0"
-                   VerticalOptions="Center"/>
-                <Button Text="Add Assessment"
+                    <Label Text="Assessments"
+                        FontSize="18"
+                        Padding="5, 0"
+                        VerticalOptions="Center"/>
+                    <Button Text="Add Assessment"
                         Clicked="AddAssessment_Clicked"
                         HorizontalOptions="EndAndExpand"
                         VerticalOptions="Center"
                         WidthRequest="140"
-                        Margin="5, 0"
-                        >
-                </Button>
-            </StackLayout>
+                        Margin="5, 0">
+                    </Button>
+                </StackLayout>
 
-            <ListView x:Name="EditCourseAssessmentList"
-                          HasUnevenRows="true"
-                          ItemSelected="AssessmentListView_ItemSelected"
-                          >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout BackgroundColor="LightGray"
-                                         Padding="10, 10"
-                                         Margin="10, 10">
+                <ListView x:Name="EditCourseAssessmentList"
+                              HasUnevenRows="true"
+                              ItemSelected="AssessmentListView_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout BackgroundColor="LightGray"
+                                             Padding="10, 10"
+                                             Margin="10, 10">
 
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding AssessmentName}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding AssessmentName}"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"/>
 
-                                    <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
-                                        <Label Text="Type:"/>
-                                        <Label Text="{Binding AssessmentType}"/>
+                                        <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal">
+                                            <Label Text="Type:"/>
+                                            <Label Text="{Binding AssessmentType}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Start:"/>
+                                        <Label Text="{Binding AssessmentStart, StringFormat='{0:MM/dd/yy}'}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="End:"/>
+                                        <Label Text="{Binding AssessmentEnd, StringFormat='{0:MM/dd/yy}'}"/>
                                     </StackLayout>
 
                                 </StackLayout>
-                                
+                            </ViewCell>
 
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Start:"/>
-                                    <Label Text="{Binding AssessmentStart, StringFormat='{0:MM/dd/yy}'}"/>
-                                </StackLayout>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="End:"/>
-                                    <Label Text="{Binding AssessmentEnd, StringFormat='{0:MM/dd/yy}'}"/>
-                                </StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Start">
+                        <Button x:Name="EditCourseCancel" Clicked="EditCourseCancel_Clicked" Text="Cancel" Padding="20, 0" Margin="10, 20"></Button>
+                        <Button x:Name="EditCourseSubmit" Clicked="EditCourseSubmit_Clicked" Text="Submit" Padding="20, 0" Margin="10, 20"></Button>
+                    </StackLayout>
 
-                            </StackLayout>
-                        </ViewCell>
+                
 
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <ContentView>
-                <FlexLayout JustifyContent="Center">
-                    <Button x:Name="EditCourseCancel" Clicked="EditCourseCancel_Clicked" Text="Cancel" Padding="20, 0" Margin="10, 20"></Button>
-                    <Button x:Name="EditCourseSubmit" Clicked="EditCourseSubmit_Clicked" Text="Submit" Padding="20, 0" Margin="10, 20"></Button>
-                </FlexLayout>
-            </ContentView>
-
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

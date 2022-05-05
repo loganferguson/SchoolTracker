@@ -76,34 +76,34 @@
                           HasUnevenRows="true"
                           ItemSelected="CourseListView_ItemSelected"
                           >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout BackgroundColor="LightGray"
-                                         Padding="10, 10"
-                                         Margin="10, 10">
-                                <Label Text="{Binding CourseName}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"/>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout BackgroundColor="LightGray"
+                                             Padding="10, 10"
+                                             Margin="10, 10">
+                                    <Label Text="{Binding CourseName}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"/>
 
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="Start"/>
-                                    <Label Text="{Binding CourseStart, StringFormat='{0:MM/dd/yy}'}"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Start"/>
+                                        <Label Text="{Binding CourseStart, StringFormat='{0:MM/dd/yy}'}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="End"/>
+                                        <Label Text="{Binding CourseEnd, StringFormat='{0:MM/dd/yy}'}"/>
+                                    </StackLayout>
+
                                 </StackLayout>
-
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="End"/>
-                                    <Label Text="{Binding CourseEnd, StringFormat='{0:MM/dd/yy}'}"/>
-                                </StackLayout>
-
-                            </StackLayout>
-                        </ViewCell>
+                            </ViewCell>
                         
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
-                <ContentView>
+            <ContentView>
                 <FlexLayout JustifyContent="Center">
                     <Button x:Name="EditTermCancel" Clicked="EditTermCancel_Clicked" Text="Cancel" Padding="20, 0" Margin="10, 20"></Button>
                     <Button x:Name="EditTermSubmit" Clicked="EditTermSubmit_Clicked" Text="Submit" Padding="20, 0" Margin="10, 20"></Button>

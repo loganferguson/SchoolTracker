@@ -26,6 +26,7 @@ namespace TrackerApp
         DateTime course_end;
         bool start_notify;
         bool end_notify;
+        string course_status;
 
         static void Init()
         {
@@ -42,7 +43,7 @@ namespace TrackerApp
             _db.CreateTable<Term>();
         }
 
-        public AddAssessment(SQLiteConnection db, int termId, string termTitle, DateTime termStart, DateTime termEnd, int courseId, string courseName, DateTime courseStart, DateTime courseEnd, bool startNotify, bool endNotify)
+        public AddAssessment(SQLiteConnection db, int termId, string termTitle, DateTime termStart, DateTime termEnd, int courseId, string courseName, DateTime courseStart, DateTime courseEnd, bool startNotify, bool endNotify, string courseStatus)
         {
             InitializeComponent();
 
@@ -58,6 +59,7 @@ namespace TrackerApp
             course_end = courseEnd;
             start_notify = startNotify;
             end_notify = endNotify;
+            course_status = courseStatus;
 
             string[] assessmentTypes = { "Objective", "Performance" };
             TypePicker.ItemsSource = assessmentTypes;
@@ -66,7 +68,7 @@ namespace TrackerApp
 
         public void AddAssessmentCancel_Clicked(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, start_notify, end_notify));
+            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, start_notify, end_notify, course_status));
         }
 
         public void AddAssessmentSubmit_Clicked(object sender, EventArgs args)
@@ -86,7 +88,7 @@ namespace TrackerApp
 
             _db.Insert(assessment);
 
-            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, start_notify, end_notify));
+            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, start_notify, end_notify, course_status));
 
         }
 

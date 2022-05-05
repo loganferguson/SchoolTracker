@@ -26,6 +26,7 @@ namespace TrackerApp
         static DateTime course_end;
         static bool course_start_notify;
         static bool course_end_notify;
+        static string course_status;
 
         static int assessment_id;
         static string assessment_type;
@@ -36,7 +37,7 @@ namespace TrackerApp
         static bool assessment_end_notify;
 
 
-        public EditAssessment(SQLiteConnection db, int termId, string termTitle, DateTime termStart, DateTime termEnd, int courseId, string courseName, DateTime courseStart, DateTime courseEnd, bool courseStartNotify, bool courseEndNotify, int assessmentId, string assessmentType, string assessmentName, DateTime assessmentStart, DateTime assessmentEnd, bool assessmentStartNotify, bool assessmentEndNotify)
+        public EditAssessment(SQLiteConnection db, int termId, string termTitle, DateTime termStart, DateTime termEnd, int courseId, string courseName, DateTime courseStart, DateTime courseEnd, bool courseStartNotify, bool courseEndNotify, string courseStatus, int assessmentId, string assessmentType, string assessmentName, DateTime assessmentStart, DateTime assessmentEnd, bool assessmentStartNotify, bool assessmentEndNotify)
         {
             InitializeComponent();
 
@@ -52,6 +53,7 @@ namespace TrackerApp
             course_end = courseEnd;
             course_start_notify = courseStartNotify;
             course_end_notify = courseEndNotify;
+            course_status = courseStatus;
 
             assessment_id = assessmentId;
             assessment_type = assessmentType;
@@ -109,7 +111,7 @@ namespace TrackerApp
             command.Bind("@endNotify", notifyEnd);
 
             command.ExecuteNonQuery();
-            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify));
+            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify, course_status));
         }
 
         public bool NotificationIsOn(Switch notificationSwitch)
@@ -124,7 +126,7 @@ namespace TrackerApp
 
         public void EditAssessmentCancel_Clicked(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify));
+            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify, course_status));
         }
         
     }

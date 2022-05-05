@@ -25,10 +25,13 @@ namespace TrackerApp
         static DateTime course_end;
         static bool course_start_notify;
         static bool course_end_notify;
+        static string course_status;
         public SQLiteConnection _db;
         static Assessment _selectedAssessment;
+        static string[] statuses = { "In-Progress", "Completed", "Dropped"};
 
-        public EditCourse(SQLiteConnection db, int termId, string termTitle, DateTime termStart, DateTime termEnd, int courseId, string courseName, DateTime courseStart, DateTime courseEnd, bool courseStartNotify, bool courseEndNotify)
+
+        public EditCourse(SQLiteConnection db, int termId, string termTitle, DateTime termStart, DateTime termEnd, int courseId, string courseName, DateTime courseStart, DateTime courseEnd, bool courseStartNotify, bool courseEndNotify, string courseStatus)
         {
             InitializeComponent();
             AssessmentMenu.IsVisible = false;
@@ -46,11 +49,14 @@ namespace TrackerApp
             course_end = courseEnd;
             course_start_notify = courseStartNotify;
             course_end_notify = courseEndNotify;
+            course_status = courseStatus;
 
             CourseName.Text = course_name;
             StartCourse_DatePicker.Date = course_start.Date;
             EndCourse_DatePicker.Date = course_end.Date;
-
+            InstructorNameEntry.Text = GetInstructor().InstructorName;
+            InstructorEmailEntry.Text = GetInstructor().Email;
+            InstructorPhoneEntry.Text = GetInstructor().Phone;
             if (courseStartNotify)
             {
                 StartCourse_Switch.IsToggled = true;
@@ -62,6 +68,33 @@ namespace TrackerApp
             var assessmentList = db.Table<Assessment>().Where(x => x.CourseId == course_id).ToList();
 
             EditCourseAssessmentList.ItemsSource = assessmentList;
+
+            EditCourseAssessmentList.HeightRequest = assessmentList.Count * 90;
+
+            StatusPicker.ItemsSource = statuses;
+            StatusPicker.SelectedIndex = GetStatusIndex();
+
+        }
+
+        public int GetStatusIndex()
+        {
+            if(course_status == "In-Progress")
+            {
+                return 0;
+            }
+            if(course_status == "Completed")
+            {
+                return 1;
+            }
+            return 2;
+        }
+
+        private Instructor GetInstructor()
+        {
+            Instructor i = new Instructor();
+
+            i = _db.Table<Instructor>().Where(x => x.CourseId == course_id).First();
+            return i;
         }
 
 
@@ -78,15 +111,30 @@ namespace TrackerApp
             var end = EndCourse_DatePicker.Date;
             var notifyStart = NotificationIsOn(StartCourse_Switch);
             var notifyEnd = NotificationIsOn(EndCourse_Switch);
-            command.CommandText = "UPDATE Course SET CourseName = @name, CourseStart = @start, CourseEnd = @end, StartNotificationsOn = @notifyStart, EndNotificationsOn = @notifyEnd WHERE CourseId = @id";
+            var status = (string)StatusPicker.ItemsSource[StatusPicker.SelectedIndex];
+
+            var instructorName = InstructorNameEntry.Text;
+            var instructorEmail = InstructorEmailEntry.Text;
+            var instructorPhone = InstructorPhoneEntry.Text;
+
+            command.CommandText = "UPDATE Course SET CourseName = @name, CourseStart = @start, CourseEnd = @end, StartNotificationsOn = @notifyStart, EndNotificationsOn = @notifyEnd, Status = @status WHERE CourseId = @id";
             command.Bind("@id", course_id);
             command.Bind("@name", name);
             command.Bind("@start", start);
             command.Bind("@end", end);
             command.Bind("@notifyStart", notifyStart);
             command.Bind("@notifyEnd", notifyEnd);
+            command.Bind("@status", status);
+
+            SQLiteCommand instructorInsert = new SQLiteCommand(_db);
+            instructorInsert.CommandText = "UPDATE Instructor SET InstructorName = @instructorName, Phone = @instructorPhone, Email = @instructorEmail WHERE CourseId = @courseId";
+            command.Bind("@instructorName", instructorName);
+            command.Bind("@instructorPhone", instructorPhone);
+            command.Bind("@instructorEmail", instructorEmail);
+            command.Bind("@courseId", course_id);
             
             command.ExecuteNonQuery();
+            instructorInsert.ExecuteNonQuery();
             Navigation.PushAsync(new EditTerm(_db, term_id, term_title, term_start, term_end));
         }
 
@@ -110,7 +158,7 @@ namespace TrackerApp
                 DisplayAlert("Sorry", "This course already has two assessments.", "Ok");
                 return;
             }
-            Navigation.PushAsync(new AddAssessment(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify));
+            Navigation.PushAsync(new AddAssessment(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify, course_status));
         }
 
         public void EditAssessment_Clicked(object sender, EventArgs args)
@@ -122,7 +170,7 @@ namespace TrackerApp
             var assessmentType = _selectedAssessment.AssessmentType;
             var assessmentStartNotify = _selectedAssessment.StartNotificationsOn;
             var assessmentEndNotify = _selectedAssessment.EndNotificationsOn;
-            Navigation.PushAsync(new EditAssessment(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify, assessmentId, assessmentType, assessmentName, assessmentStart, assessmentEnd, assessmentStartNotify, assessmentEndNotify));
+            Navigation.PushAsync(new EditAssessment(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify, course_status, assessmentId, assessmentType, assessmentName, assessmentStart, assessmentEnd, assessmentStartNotify, assessmentEndNotify));
         }
 
         public async void DeleteAssessment_Clicked(object sender, EventArgs args)
@@ -141,12 +189,12 @@ namespace TrackerApp
                 command.ExecuteNonQuery();
             }
 
-            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify));
+            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify, course_status));
         }
 
         public void CourseNotes_Clicked(object sender, EventArgs args)
         {
-            Navigation.PushAsync(new CourseNotes(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify));
+            Navigation.PushAsync(new CourseNotes(_db, term_id, term_title, term_start, term_end, course_id, course_name, course_start, course_end, course_start_notify, course_end_notify, course_status));
         }
         public void AssessmentListView_ItemSelected(object sender, EventArgs args)
         {

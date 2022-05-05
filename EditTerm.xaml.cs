@@ -96,7 +96,8 @@ namespace TrackerApp
             var courseEnd = _selectedCourse.CourseEnd;
             var startNotify = _selectedCourse.StartNotificationsOn;
             var endNotify = _selectedCourse.EndNotificationsOn;
-            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, courseId, courseName, courseStart, courseEnd, startNotify, endNotify));
+            var courseStatus = _selectedCourse.Status;
+            Navigation.PushAsync(new EditCourse(_db, term_id, term_title, term_start, term_end, courseId, courseName, courseStart, courseEnd, startNotify, endNotify, courseStatus));
         }
 
 
