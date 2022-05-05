@@ -175,16 +175,14 @@ namespace TrackerApp
 
         public async void DeleteAssessment_Clicked(object sender, EventArgs args)
         {
-            var id = _selectedAssessment.CourseId;
-
-            string query = string.Format("DELETE FROM Assessment WHERE AssessmentId = {0}", id);
+            var id = _selectedAssessment.AssessmentId;
             SQLiteCommand command = new SQLiteCommand(_db);
-
-            command.CommandText = query;
+            command.CommandText = "DELETE FROM Assessment WHERE AssessmentId = @id";
+            command.Bind("@id", id);
 
             bool answer = await DisplayAlert("Delete Assessment", "Are you sure you want to delete this assessment?", "Yes", "No");
 
-            if (answer)
+            if (answer == true)
             {
                 command.ExecuteNonQuery();
             }

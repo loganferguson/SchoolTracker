@@ -108,18 +108,14 @@ namespace TrackerApp
 
             string query = string.Format("DELETE FROM Course WHERE CourseId = {0}", id);
             SQLiteCommand command = new SQLiteCommand(_db);
-
             command.CommandText = query;
-
             bool answer = await DisplayAlert("Delete Course", "Are you sure you want to delete this course?", "Yes", "No");
 
             if (answer)
             {
                 command.ExecuteNonQuery();
             }
-
             Navigation.PushAsync(new EditTerm(_db, term_id, term_title, term_start, term_end));
-
 
         }
 
